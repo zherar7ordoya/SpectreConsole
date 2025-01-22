@@ -1,6 +1,6 @@
 ﻿using Algorithmics.DependencyInjection;
-
 using Spectre.Console;
+
 
 AnsiConsole.MarkupLine("\n[lime]ALGORITMOS[/]\n");
 AnsiConsole.Write(new Rule("[yellow]Menú Principal[/]").RuleStyle("yellow"));
@@ -26,7 +26,6 @@ while (true)
             return;
     }
 
-    // Pausa antes de volver al menú principal
-    AnsiConsole.MarkupLine("\n[gray](Presiona cualquier tecla para continuar...)[/]");
+    AnsiConsole.MarkupLine("\n[gray](Press any key to continue...)[/]");
     Console.ReadKey(true);
 }
