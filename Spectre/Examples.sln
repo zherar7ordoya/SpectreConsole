@@ -71,7 +71,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlternateScreen", "Console\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Paths", "Console\Paths\Paths.csproj", "{65CB00B0-A3AE-4E8F-A990-4C8C1A232FE2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Layout", "Console\Layout\Layout.csproj", "{A9FDE73A-8452-4CA3-B366-3F900597E132}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LayoutExample", "Console\Layout\LayoutExample.csproj", "{A9FDE73A-8452-4CA3-B366-3F900597E132}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Json", "Console\Json\Json.csproj", "{ABE3E734-0756-4D5A-B28A-E6E526D9927D}"
 EndProject

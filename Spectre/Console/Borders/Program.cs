@@ -14,6 +14,9 @@ public static class Program
         // Render table borders
         HorizontalRule("TABLE BORDERS");
         TableBorders();
+
+        AnsiConsole.WriteLine("Press any key to continue");
+        AnsiConsole.Console.Input.ReadKey(false);
     }
 
     private static void PanelBorders()

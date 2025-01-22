@@ -19,6 +19,9 @@ public static class Program
 
         AnsiConsole.WriteLine();
         WriteAligned(windowsPath);
+
+        AnsiConsole.WriteLine("Press any key to continue");
+        AnsiConsole.Console.Input.ReadKey(false);
     }
 
     private static void WritePlain(string windowsPath, string unixPath)

@@ -37,5 +37,8 @@ public static class Program
                 .RoundedBorder()
                 .Header("[blue]Right[/]")
                 .HeaderAlignment(Justify.Right));
+
+        AnsiConsole.WriteLine("Press any key to continue");
+        AnsiConsole.Console.Input.ReadKey(false);
     }
 }

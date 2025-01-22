@@ -4,7 +4,7 @@ namespace Prompt
 {
     public static class Program
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
             // Check if we can accept key strokes
             if (!AnsiConsole.Profile.Capabilities.Interactive)
@@ -58,6 +58,9 @@ namespace Prompt
                 .AddRow("[grey]Mask[/]", mask)
                 .AddRow("[grey]Null Mask[/]", nullMask)
                 .AddRow("[grey]Favorite color[/]", string.IsNullOrEmpty(color) ? "Unknown" : color));
+
+            AnsiConsole.WriteLine("Press any key to continue");
+            AnsiConsole.Console.Input.ReadKey(false);
         }
 
         private static void WriteDivider(string text)

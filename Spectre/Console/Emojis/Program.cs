@@ -4,7 +4,7 @@ namespace Emojis;
 
 public static class Program
 {
-    public static void Main(string[] args)
+    public static void Main()
     {
         // Show a known emoji
         RenderEmoji();
@@ -12,6 +12,9 @@ public static class Program
         // Show a remapped emoji
         Emoji.Remap("globe_showing_europe_africa", Emoji.Known.GrinningFaceWithSmilingEyes);
         RenderEmoji();
+
+        AnsiConsole.WriteLine("Press any key to continue");
+        AnsiConsole.Console.Input.ReadKey(false);
     }
 
     private static void RenderEmoji()

@@ -24,6 +24,9 @@ public static class Program
         AnsiConsole.Write(
             new Panel(grid)
                 .Header("Information"));
+
+        AnsiConsole.WriteLine("Press any key to continue");
+        AnsiConsole.Console.Input.ReadKey(false);
     }
 
     private static string YesNo(bool value)

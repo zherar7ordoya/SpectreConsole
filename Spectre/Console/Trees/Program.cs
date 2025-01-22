@@ -11,6 +11,9 @@ public static class Program
         // Render the tree
         var tree = BuildTree();
         AnsiConsole.Write(tree);
+
+        AnsiConsole.WriteLine("Press any key to continue");
+        AnsiConsole.Console.Input.ReadKey(false);
     }
 
     private static Tree BuildTree()

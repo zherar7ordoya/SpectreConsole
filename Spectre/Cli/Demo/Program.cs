@@ -11,6 +11,7 @@ public static class Program
     public static int Main(string[] args)
     {
         var app = new CommandApp();
+
         app.Configure(config =>
         {
             config.SetApplicationName("fake-dotnet");
