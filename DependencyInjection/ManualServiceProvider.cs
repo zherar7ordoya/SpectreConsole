@@ -1,7 +1,7 @@
 ﻿using Spectre.Console;
 
 
-namespace Algorithmics;
+namespace Algorithmics.DependencyInjection;
 
 public class ManualServiceProvider : IServiceProvider
 {

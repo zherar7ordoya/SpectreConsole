@@ -1,9 +1,12 @@
-﻿using Algorithmics;
+﻿using Algorithmics.CompositePattern;
+using Algorithmics.DependencyInjection;
+
 using Spectre.Console;
 
 
 var examples = new List<(string Title, Action Example)>
 {
+    ("Patrón composite", CompositePattern.Run),
     ("Inyección de dependencias", DependencyInjection.Run),
     ("Salir", () => Environment.Exit(0))
 };

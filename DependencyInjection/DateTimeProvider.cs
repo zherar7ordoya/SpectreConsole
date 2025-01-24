@@ -1,4 +1,4 @@
-﻿namespace Algorithmics;
+﻿namespace Algorithmics.DependencyInjection;
 
 
 public class DateTimeProvider : IDateTime
