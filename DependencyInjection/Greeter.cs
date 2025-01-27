@@ -8,6 +8,6 @@ public class Greeter(IDateTime dateTime)
     public void Greet(string name)
     {
         var currentDateTime = _dateTime.GetCurrentDateTime();
-        Console.WriteLine($"Hello {name}! Current date and time: {currentDateTime}");
+        Console.WriteLine($"\nHello {name}!\nCurrent date and time: {currentDateTime}");
     }
 }
