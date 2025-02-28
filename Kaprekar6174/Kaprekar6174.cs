@@ -17,9 +17,9 @@ public static class Kaprekar6174
         AnsiConsole.MarkupLine("\n[lime]6174: el misterioso número de Kaprekar.[/]\n");
 
         Console.WriteLine("Ingrese un número de 4 cifras (que no sean todas iguales):");
-        string input = Console.ReadLine();
+        string? input = Console.ReadLine();
 
-        if (!EsNumeroValido(input))
+        if (input == null || !EsNumeroValido(input))
         {
             Console.WriteLine("Número inválido. Debe tener 4 cifras distintas entre sí.");
             return;
