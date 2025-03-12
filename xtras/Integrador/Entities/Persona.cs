@@ -1,14 +1,18 @@
-﻿namespace Integrador;
+﻿using Integrador.Abstract;
+
+namespace Integrador.Entities;
 
 public class Persona(string dni,
                      string nombre,
                      string apellido) : Entity
 {
-    public string DNI { get; init; } = dni ?? throw new ArgumentNullException(nameof(dni));
-    public string Nombre { get; set; } = nombre ?? throw new ArgumentNullException(nameof(nombre));
-    public string Apellido { get; set; } = apellido ?? throw new ArgumentNullException(nameof(apellido));
+    public readonly string DNI = dni ?? throw new ArgumentNullException(nameof(dni));
+    public readonly string Nombre = nombre ?? throw new ArgumentNullException(nameof(nombre));
+    public readonly string Apellido = apellido ?? throw new ArgumentNullException(nameof(apellido));
     
     private readonly List<Auto> autos = [];
+
+    public static event Action<string>? PersonaEliminada;
 
     public IReadOnlyList<Auto> ObtenerAutos() => autos.AsReadOnly();
 
@@ -35,5 +39,5 @@ public class Persona(string dni,
         }
     }
 
-    ~Persona() => throw new Exception($"El objeto Persona con DNI {DNI} ha sido eliminado.");
+    ~Persona() => PersonaEliminada?.Invoke($"El objeto Persona con DNI {DNI} ha sido eliminado.");
 }

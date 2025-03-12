@@ -1,8 +1,10 @@
-﻿using System.Text;
+﻿using Integrador.Abstract;
+
+using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace Integrador;
+namespace Integrador.Persistence;
 
 public class XmlPersister<T> : IPersister<T> where T : IEntity
 {
