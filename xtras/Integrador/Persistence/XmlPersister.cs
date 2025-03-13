@@ -8,7 +8,7 @@ namespace Integrador.Persistence;
 
 public class XmlPersister<T> : IPersister<T> where T : IEntity
 {
-    public IList<T> Read()
+    public List<T> Read()
     {
         string file = $"{typeof(T).Name}.xml";
 
@@ -40,7 +40,7 @@ public class XmlPersister<T> : IPersister<T> where T : IEntity
         }
     }
 
-    public bool Write(IList<T> datos)
+    public bool Write(List<T> datos)
     {
         string file = $"{typeof(T).Name}.xml";
 

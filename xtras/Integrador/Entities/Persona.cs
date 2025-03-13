@@ -13,6 +13,8 @@ public partial class Persona : Entity
         Apellido = apellido ?? throw new ArgumentNullException(nameof(apellido));
     }
 
+    //--------------------------------------------------------------------------
+
     private string? dni = string.Empty;
     public string? DNI
     {
@@ -27,31 +29,17 @@ public partial class Persona : Entity
         }
     }
 
-    [System.Text.RegularExpressions.GeneratedRegex(@"^\d{7,8}$")]
-    public static partial Regex DniRegex();
-
     public string? Nombre { get; set; }
     public string? Apellido { get; set; }
+        
+    public List<Auto> Autos = [];
 
-    private List<Auto> autos = new List<Auto>();
-    public IReadOnlyList<Auto> Autos => autos.AsReadOnly();
+    //--------------------------------------------------------------------------
 
-    public void AgregarAuto(Auto auto)
-    {
-        if (autos.Contains(auto))
-        {
-            throw new InvalidOperationException("El auto ya pertenece a la persona.");
-        }
-        autos.Add(auto);
-    }
+    [System.Text.RegularExpressions.GeneratedRegex(@"^\d{7,8}$")]
+    private static partial Regex DniRegex();
 
-    public void RemoverAuto(Auto auto)
-    {
-        if (autos.Remove(auto))
-        {
-            auto.LiberarDueño();
-        }
-    }
+    //--------------------------------------------------------------------------
 
     public static event Action<string>? PersonaEliminada;
     ~Persona() => PersonaEliminada?.Invoke($"El objeto Persona con DNI {DNI} ha sido eliminado.");

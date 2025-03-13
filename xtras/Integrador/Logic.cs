@@ -4,7 +4,7 @@ namespace Integrador;
 
 public static class Logic
 {
-    public static void AddAuto(Persona persona, Auto auto)
+    public static void AsignarAuto(Persona persona, Auto auto)
     {
         if (auto.Dueño is not null)
         {
@@ -12,14 +12,14 @@ public static class Logic
         }
 
         persona.Autos.Add(auto);
-        auto.Dueño = persona;
+        auto.EstablecerDueño(persona);
     }
 
-    public static void RemoveAuto(Persona persona, Auto auto)
+    public static void DesasignarAuto(Persona persona, Auto auto)
     {
         if (persona.Autos.Remove(auto))
         {
-            auto.Dueño = null;
+            auto.EstablecerDueño(null);
         }
         else
         {
@@ -28,6 +28,8 @@ public static class Logic
     }
 
     public static List<Auto> GetListaAutos(Persona persona) => persona.Autos;
+
     public static int GetCantidadAutos(Persona persona) => persona.Autos.Count;
+
     public static decimal GetValorAutos(Persona persona) => persona.Autos.Sum(auto => auto.Precio);
 }

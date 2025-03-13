@@ -2,6 +2,6 @@
 
 public interface IPersister<T> where T : IEntity
 {
-    IList<T> Read();
-    bool Write(IList<T> datos);
+    List<T> Read();
+    bool Write(List<T> datos);
 }

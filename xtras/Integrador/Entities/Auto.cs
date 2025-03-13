@@ -15,6 +15,8 @@ public partial class Auto : Entity
         Precio = precio > 0 ? precio : throw new ArgumentException("El precio debe ser mayor a 0.");
     }
 
+    //--------------------------------------------------------------------------
+
     private string? patente = string.Empty;
     public string? Patente
     {
@@ -29,36 +31,20 @@ public partial class Auto : Entity
         }
     }
 
+    public string? Marca { get; }
+    public string? Modelo { get; }
+    public int Año { get; }
+    public decimal Precio { get; }
+
+    public Persona? Dueño { get; internal set; }
+    internal void EstablecerDueño(Persona? nuevoDueño) => Dueño = nuevoDueño;
+
+    //--------------------------------------------------------------------------
+
     [System.Text.RegularExpressions.GeneratedRegex(@"^[A-Z]{2}\d{3}[A-Z]{2}$|^[A-Z]{3}\d{3}$")]
     private static partial Regex PatenteRegex();
 
-    public string? Marca { get; set; }
-    public string? Modelo { get; set; }
-    public int Año { get; set; }
-    public decimal Precio { get; set; }
-
-    private Persona? dueño;
-    public Persona? Dueño
-    {
-        get => dueño;
-        private set => dueño = value;
-    }
-
-    public void AsignarDueño(Persona persona)
-    {
-        if (Dueño is not null)
-        {
-            throw new InvalidOperationException("El auto ya tiene un dueño.");
-        }
-        Dueño = persona;
-        persona.AgregarAuto(this);
-    }
-
-    public void LiberarDueño()
-    {
-        Dueño?.RemoverAuto(this);
-        Dueño = null;
-    }
+    //--------------------------------------------------------------------------
 
     public static event Action<string>? AutoEliminado;
     ~Auto() => AutoEliminado?.Invoke($"El objeto Auto con Patente {Patente} ha sido eliminado.");
