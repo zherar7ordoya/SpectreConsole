@@ -1,5 +1,4 @@
 ﻿using Integrador.Abstract;
-
 using System.Text;
 using System.Xml.Serialization;
 
@@ -7,6 +6,14 @@ namespace Integrador.Persistence;
 
 public class XmlPersister<T> : IPersister<T> where T : IEntity
 {
+    private static void LogError(string message, Exception ex)
+    {
+        var logMessage = $"[{DateTime.Now}] {message} - Excepción: {ex.GetType().Name}, Mensaje: {ex.Message}";
+        File.AppendAllText("Log.txt", logMessage + Environment.NewLine);
+    }
+
+    //--------------------------------------------------------------------------
+
     public List<T> Read()
     {
         string file = $"{typeof(T).Name}.xml";
@@ -26,12 +33,20 @@ public class XmlPersister<T> : IPersister<T> where T : IEntity
             var result = serializer.Deserialize(reader) as List<T>;
             return result ?? [];
         }
+        catch (FileNotFoundException ex)
+        {
+            LogError($"Archivo no encontrado: {file}", ex);
+            throw new PersisterException($"El archivo {file} no fue encontrado.", ex);
+        }
+        catch (UnauthorizedAccessException ex)
+        {
+            LogError($"Acceso no autorizado al archivo: {file}", ex);
+            throw new PersisterException($"No tiene permisos para acceder al archivo {file}.", ex);
+        }
         catch (Exception ex)
         {
-            var logMessage = $"[{DateTime.Now}] \t Error en {nameof(XmlPersister<T>)}: {ex.Message}";
-            File.AppendAllText("Log.txt", logMessage + Environment.NewLine);
-
-            throw new PersisterException($"Error en {nameof(XmlPersister<T>)} al leer {typeof(T).Name}.xml", ex);
+            LogError($"Error desconocido al leer {file}", ex);
+            throw new PersisterException($"Error al leer {file}.", ex);
         }
         finally
         {
@@ -54,12 +69,20 @@ public class XmlPersister<T> : IPersister<T> where T : IEntity
             serializer.Serialize(writer, datos);
             return true;
         }
+        catch (FileNotFoundException ex)
+        {
+            LogError($"Archivo no encontrado: {file}", ex);
+            throw new PersisterException($"El archivo {file} no fue encontrado.", ex);
+        }
+        catch (UnauthorizedAccessException ex)
+        {
+            LogError($"Acceso no autorizado al archivo: {file}", ex);
+            throw new PersisterException($"No tiene permisos para acceder al archivo {file}.", ex);
+        }
         catch (Exception ex)
         {
-            var logMessage = $"[{DateTime.Now}] \t Error en {nameof(XmlPersister<T>)}: {ex.Message}";
-            File.AppendAllText("Log.txt", logMessage + Environment.NewLine);
-
-            throw new PersisterException($"Error en {nameof(XmlPersister<T>)} al leer {typeof(T).Name}.xml", ex);
+            LogError($"Error desconocido al leer {file}", ex);
+            throw new PersisterException($"Error al leer {file}.", ex);
         }
     }
 
@@ -71,12 +94,20 @@ public class XmlPersister<T> : IPersister<T> where T : IEntity
             using StreamWriter writer = new(file, false, Encoding.Unicode);
             serializer.Serialize(writer, new List<T>());
         }
+        catch (FileNotFoundException ex)
+        {
+            LogError($"Archivo no encontrado: {file}", ex);
+            throw new PersisterException($"El archivo {file} no fue encontrado.", ex);
+        }
+        catch (UnauthorizedAccessException ex)
+        {
+            LogError($"Acceso no autorizado al archivo: {file}", ex);
+            throw new PersisterException($"No tiene permisos para acceder al archivo {file}.", ex);
+        }
         catch (Exception ex)
         {
-            var logMessage = $"[{DateTime.Now}] \t Error en {nameof(XmlPersister<T>)}: {ex.Message}";
-            File.AppendAllText("Log.txt", logMessage + Environment.NewLine);
-
-            throw new PersisterException($"Error en {nameof(XmlPersister<T>)} al leer {typeof(T).Name}.xml", ex);
+            LogError($"Error desconocido al leer {file}", ex);
+            throw new PersisterException($"Error al leer {file}.", ex);
         }
     }
 }

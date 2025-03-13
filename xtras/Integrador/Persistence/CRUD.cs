@@ -6,6 +6,30 @@ public class CRUD<T> : ICRUD<T> where T : IEntity
 {
     private readonly XmlPersister<T> _persister = new();
 
+    private static void LogError(string message)
+    {
+        string logFile = "error_log.txt";
+        var logMessage = $"[{DateTime.Now}] {message}";
+        File.AppendAllText(logFile, logMessage + Environment.NewLine);
+    }
+
+    protected bool ValidateAndCreate(T entity, Action<T> validator)
+    {
+        try
+        {
+            validator(entity);
+            Create(entity);
+            return true;
+        }
+        catch (ArgumentException ex)
+        {
+            LogError($"Error al validar y crear el objeto {typeof(T).Name}: {ex.Message}");
+            return false;  // No se pudo crear debido a un error de validación
+        }
+    }
+
+    //--------------------------------------------------------------------------
+
     public T Create(T entity)
     {
         var entities = _persister.Read();
