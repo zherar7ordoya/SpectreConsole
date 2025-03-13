@@ -4,6 +4,20 @@ namespace Integrador;
 
 public static class Logic
 {
+    public static void CrearAuto(string patente, string marca, string modelo, int año, decimal precio)
+    {
+        var auto = new Auto(patente, marca, modelo, año, precio);
+        AutoValidator.Validar(auto);
+        // Aquí guardaríamos el auto en la persistencia
+    }
+
+    public static void CrearPersona(string dni, string nombre, string apellido)
+    {
+        var persona = new Persona(dni, nombre, apellido);
+        PersonaValidator.Validar(persona);
+        // Aquí guardaríamos la persona en la persistencia
+    }
+
     public static void AsignarAuto(Persona persona, Auto auto)
     {
         if (auto.Dueño is not null)

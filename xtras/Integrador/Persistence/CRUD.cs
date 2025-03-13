@@ -18,16 +18,14 @@ public class CRUD<T> : ICRUD<T> where T : IEntity
     public bool Delete(T entity)
     {
         var entities = _persister.Read();
-        var entityToDelete = entities.FirstOrDefault(x => x.Id == entity.Id);
-        if (entityToDelete == null) return false;
-        entities.Remove(entityToDelete);
-        return _persister.Write(entities);
+        int removedCount = entities.RemoveAll(x => x.Id == entity.Id);
+        return removedCount > 0 && _persister.Write(entities);
     }
 
     public List<T> Read()
     {
         var entities = _persister.Read();
-        return (List<T>)entities;
+        return entities;
     }
 
     public bool Update(T entity)
@@ -44,5 +42,4 @@ public class CRUD<T> : ICRUD<T> where T : IEntity
 
         return _persister.Write(entities);
     }
-
 }

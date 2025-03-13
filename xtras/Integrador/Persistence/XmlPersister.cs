@@ -1,7 +1,6 @@
 ﻿using Integrador.Abstract;
 
 using System.Text;
-using System.Xml;
 using System.Xml.Serialization;
 
 namespace Integrador.Persistence;
@@ -27,9 +26,13 @@ public class XmlPersister<T> : IPersister<T> where T : IEntity
             var result = serializer.Deserialize(reader) as List<T>;
             return result ?? [];
         }
-        catch (XmlException ex) { throw new XmlException("Se produjo un error al procesar el archivo XML.", ex); }
-        catch (IOException ex) { throw new IOException("Se produjo un error al leer el archivo.", ex); }
-        catch (Exception ex) { throw new Exception("Se produjo un error al intentar leer los datos.", ex); }
+        catch (Exception ex)
+        {
+            var logMessage = $"[{DateTime.Now}] \t Error en {nameof(XmlPersister<T>)}: {ex.Message}";
+            File.AppendAllText("Log.txt", logMessage + Environment.NewLine);
+
+            throw new PersisterException($"Error en {nameof(XmlPersister<T>)} al leer {typeof(T).Name}.xml", ex);
+        }
         finally
         {
             if (reader != null)
@@ -51,9 +54,13 @@ public class XmlPersister<T> : IPersister<T> where T : IEntity
             serializer.Serialize(writer, datos);
             return true;
         }
-        catch (XmlException ex) { throw new XmlException("Se produjo un error al procesar el archivo XML.", ex); }
-        catch (IOException ex) { throw new IOException("Se produjo un error al escribir el archivo.", ex); }
-        catch (Exception ex) { throw new Exception("Se produjo un error al intentar escribir los datos.", ex); }
+        catch (Exception ex)
+        {
+            var logMessage = $"[{DateTime.Now}] \t Error en {nameof(XmlPersister<T>)}: {ex.Message}";
+            File.AppendAllText("Log.txt", logMessage + Environment.NewLine);
+
+            throw new PersisterException($"Error en {nameof(XmlPersister<T>)} al leer {typeof(T).Name}.xml", ex);
+        }
     }
 
     private static void CreateEmptyFile(string file)
@@ -66,7 +73,10 @@ public class XmlPersister<T> : IPersister<T> where T : IEntity
         }
         catch (Exception ex)
         {
-            throw new Exception("Se produjo un error al intentar crear el archivo XML.", ex);
+            var logMessage = $"[{DateTime.Now}] \t Error en {nameof(XmlPersister<T>)}: {ex.Message}";
+            File.AppendAllText("Log.txt", logMessage + Environment.NewLine);
+
+            throw new PersisterException($"Error en {nameof(XmlPersister<T>)} al leer {typeof(T).Name}.xml", ex);
         }
     }
 }
