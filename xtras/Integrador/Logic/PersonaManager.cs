@@ -5,10 +5,10 @@ namespace Integrador.Logic;
 
 public class PersonaManager : CRUD<Persona>
 {
-    public void CrearPersona(string dni, string nombre, string apellido)
+    public bool CrearPersona(string dni, string nombre, string apellido)
     {
         var persona = new Persona(dni, nombre, apellido);
-        ValidateAndCreate(persona, PersonaValidator.Validar);
+        return ValidateAndCreate(persona, PersonaValidator.Validar);
     }
 
     public static List<Auto> GetListaAutos(Persona persona) => persona.Autos;

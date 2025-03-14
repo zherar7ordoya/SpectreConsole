@@ -39,7 +39,7 @@
             label5 = new Label();
             label4 = new Label();
             label3 = new Label();
-            label2 = new Label();
+            ValorTotalAutosLabel = new Label();
             AutosDePersonaDataGridView = new DataGridView();
             EliminarPersonaButton = new Button();
             GuardarPersonaButton = new Button();
@@ -47,6 +47,8 @@
             PersonasDataGridView = new DataGridView();
             label1 = new Label();
             panel2 = new Panel();
+            AñoTextBox = new TextBox();
+            label14 = new Label();
             label11 = new Label();
             PrecioNumericUpDown = new NumericUpDown();
             ModeloTextBox = new TextBox();
@@ -89,7 +91,7 @@
             panel1.Controls.Add(label5);
             panel1.Controls.Add(label4);
             panel1.Controls.Add(label3);
-            panel1.Controls.Add(label2);
+            panel1.Controls.Add(ValorTotalAutosLabel);
             panel1.Controls.Add(AutosDePersonaDataGridView);
             panel1.Controls.Add(EliminarPersonaButton);
             panel1.Controls.Add(GuardarPersonaButton);
@@ -167,15 +169,15 @@
             label3.TabIndex = 7;
             label3.Text = "Id";
             // 
-            // label2
+            // ValorTotalAutosLabel
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Calibri", 22F);
-            label2.Location = new Point(467, 213);
-            label2.Name = "label2";
-            label2.Size = new Size(76, 37);
-            label2.TabIndex = 6;
-            label2.Text = "Total";
+            ValorTotalAutosLabel.AutoSize = true;
+            ValorTotalAutosLabel.Font = new Font("Calibri", 22F);
+            ValorTotalAutosLabel.Location = new Point(467, 213);
+            ValorTotalAutosLabel.Name = "ValorTotalAutosLabel";
+            ValorTotalAutosLabel.Size = new Size(76, 37);
+            ValorTotalAutosLabel.TabIndex = 6;
+            ValorTotalAutosLabel.Text = "Total";
             // 
             // AutosDePersonaDataGridView
             // 
@@ -211,6 +213,7 @@
             GuardarPersonaButton.TabIndex = 3;
             GuardarPersonaButton.Text = "Guardar";
             GuardarPersonaButton.UseVisualStyleBackColor = true;
+            GuardarPersonaButton.Click += GuardarPersonaButton_Click;
             // 
             // NuevoPersonaButton
             // 
@@ -222,6 +225,7 @@
             NuevoPersonaButton.TabIndex = 2;
             NuevoPersonaButton.Text = "Agregar";
             NuevoPersonaButton.UseVisualStyleBackColor = true;
+            NuevoPersonaButton.Click += NuevoPersonaButton_Click;
             // 
             // PersonasDataGridView
             // 
@@ -250,6 +254,8 @@
             // 
             panel2.BackColor = Color.White;
             panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Controls.Add(AñoTextBox);
+            panel2.Controls.Add(label14);
             panel2.Controls.Add(label11);
             panel2.Controls.Add(PrecioNumericUpDown);
             panel2.Controls.Add(ModeloTextBox);
@@ -271,10 +277,26 @@
             panel2.Size = new Size(549, 490);
             panel2.TabIndex = 1;
             // 
+            // AñoTextBox
+            // 
+            AñoTextBox.Location = new Point(433, 174);
+            AñoTextBox.Name = "AñoTextBox";
+            AñoTextBox.Size = new Size(100, 25);
+            AñoTextBox.TabIndex = 18;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new Point(319, 177);
+            label14.Name = "label14";
+            label14.Size = new Size(33, 18);
+            label14.TabIndex = 17;
+            label14.Text = "Año";
+            // 
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(319, 177);
+            label11.Location = new Point(319, 207);
             label11.Name = "label11";
             label11.Size = new Size(47, 18);
             label11.TabIndex = 16;
@@ -283,7 +305,7 @@
             // PrecioNumericUpDown
             // 
             PrecioNumericUpDown.DecimalPlaces = 2;
-            PrecioNumericUpDown.Location = new Point(433, 175);
+            PrecioNumericUpDown.Location = new Point(433, 205);
             PrecioNumericUpDown.Name = "PrecioNumericUpDown";
             PrecioNumericUpDown.Size = new Size(100, 25);
             PrecioNumericUpDown.TabIndex = 15;
@@ -412,7 +434,7 @@
             // AsignarAutoButton
             // 
             AsignarAutoButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            AsignarAutoButton.Image = (Image)resources.GetObject("AsignarAutoButton.Image");
+            AsignarAutoButton.Image = Properties.Resources.sign_left;
             AsignarAutoButton.Location = new Point(567, 63);
             AsignarAutoButton.Name = "AsignarAutoButton";
             AsignarAutoButton.Size = new Size(118, 34);
@@ -460,7 +482,7 @@
             // 
             ErrorProvider.ContainerControl = this;
             // 
-            // MainForm
+            // ViewForm
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -474,7 +496,7 @@
             Controls.Add(panel1);
             Font = new Font("Calibri", 11F);
             Margin = new Padding(4);
-            Name = "MainForm";
+            Name = "ViewForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Integrador";
             panel1.ResumeLayout(false);
@@ -500,7 +522,7 @@
         internal Button GuardarPersonaButton;
         internal Button NuevoPersonaButton;
         internal DataGridView AutosDePersonaDataGridView;
-        internal Label label2;
+        internal Label ValorTotalAutosLabel;
         internal Label label6;
         internal Label label5;
         internal Label label4;
@@ -530,5 +552,7 @@
         internal DataGridView AutosAsignadosDataGridView;
         internal Label label13;
         internal ErrorProvider ErrorProvider;
+        internal TextBox AñoTextBox;
+        internal Label label14;
     }
 }

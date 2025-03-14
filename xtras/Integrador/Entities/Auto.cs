@@ -23,8 +23,9 @@ public class Auto : Entity
     public int Año { get; set; }
     public decimal Precio { get; set; }
 
-    public Persona? Dueño { get; internal set; }
-    internal void EstablecerDueño(Persona? nuevoDueño) => Dueño = nuevoDueño;
+    // No puede ser "internal set" porque "set" se necesita para la serialización.
+    public Persona? Dueño { get; set; }
+    //internal void EstablecerDueño(Persona? nuevoDueño) => Dueño = nuevoDueño;
 
     //--------------------------------------------------------------------------
 

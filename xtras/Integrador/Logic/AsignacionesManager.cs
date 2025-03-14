@@ -12,14 +12,16 @@ public static class AsignacionesManager
         }
 
         persona.Autos.Add(auto);
-        auto.EstablecerDueño(persona);
+        // auto.EstablecerDueño(persona); <== Ver nota en el archivo Auto.cs
+        auto.Dueño = persona;
     }
 
     public static void DesasignarAuto(Persona persona, Auto auto)
     {
         if (persona.Autos.Remove(auto))
         {
-            auto.EstablecerDueño(null);
+            //auto.EstablecerDueño(null); <== Ver nota en el archivo Auto.cs
+            auto.Dueño = null;
         }
         else
         {
