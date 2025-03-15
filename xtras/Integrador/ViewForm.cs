@@ -5,11 +5,15 @@ namespace Integrador;
 public partial class ViewForm : Form
 {
     private readonly ViewController _viewController;
+    private readonly BindingSource _personaBindingSource = [];
+    private readonly BindingSource _autosDePersonaBindingSource = [];
 
     public ViewForm()
     {
         InitializeComponent();
         _viewController = new ViewController();
+
+        ConfigurarEnlaces();
 
         Auto.AutoEliminado += mensaje =>
         MessageBox.Show(mensaje, "Objeto Eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -20,6 +24,26 @@ public partial class ViewForm : Form
         CargarAutos();
     }
 
+    private void ConfigurarEnlaces()
+    {
+        try
+        {
+            // Enlazar los TextBox a las propiedades de Persona
+            IdPersonaTextBox.DataBindings.Add("Text", _personaBindingSource, "Id");
+            DniTextBox.DataBindings.Add("Text", _personaBindingSource, "DNI");
+            NombreTextBox.DataBindings.Add("Text", _personaBindingSource, "Nombre");
+            ApellidoTextBox.DataBindings.Add("Text", _personaBindingSource, "Apellido");
+
+            // Enlazar la grilla de autos de la persona
+            AutosDePersonaDataGridView.DataSource = _autosDePersonaBindingSource;
+        }
+        catch (Exception ex)
+        {
+            Service.LogError("Error al seleccionar una persona.", ex);
+            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
+
     // Métodos para Personas.---------------------------------------------------
     private void CargarPersonas()
     {
@@ -28,56 +52,68 @@ public partial class ViewForm : Form
 
     private void PersonasDataGridView_SelectionChanged(object sender, EventArgs e)
     {
-        if (PersonasDataGridView.SelectedRows.Count > 0)
+        try
         {
-            if (PersonasDataGridView.SelectedRows[0].DataBoundItem is Persona personaSeleccionada)
+            if (PersonasDataGridView.SelectedRows.Count > 0)
             {
-                AutosDePersonaDataGridView.DataSource =
-                    ViewController.ObtenerAutosDePersona(personaSeleccionada);
-                ValorTotalAutosLabel.Text =
-                    ViewController.ObtenerValorTotalAutosDePersona(personaSeleccionada).ToString("C");
+                if (PersonasDataGridView.SelectedRows[0].DataBoundItem is Persona personaSeleccionada)
+                {
+                    _personaBindingSource.DataSource = personaSeleccionada;
+                    _autosDePersonaBindingSource.DataSource = personaSeleccionada.Autos;
+                    ValorTotalAutosLabel.Text = ViewController.ObtenerValorTotalAutosDePersona(personaSeleccionada).ToString("C");
+                }
+            }
+            else if (PersonasDataGridView.SelectedRows.Count == 0)
+            {
+                _personaBindingSource.DataSource = new Persona(); // Objeto vacío
+                _autosDePersonaBindingSource.DataSource = new List<Auto>(); // Lista vacía
+                ValorTotalAutosLabel.Text = "0,00 €";
             }
         }
-    }
-
-    private void PersonasDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
-    {
-        if (PersonasDataGridView.SelectedRows.Count > 0)
+        catch (Exception ex)
         {
-            if (PersonasDataGridView.SelectedRows[0].DataBoundItem is Persona personaSeleccionada)
-            {
-                DniTextBox.Text = personaSeleccionada.DNI;
-                NombreTextBox.Text = personaSeleccionada.Nombre;
-                ApellidoTextBox.Text = personaSeleccionada.Apellido;
-            }
+            Service.LogError("Error al seleccionar una persona.", ex);
+            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        finally
+        {
+            NuevoPersonaButton.Enabled = true;
         }
     }
 
     private void NuevoPersonaButton_Click(object sender, EventArgs e)
     {
-        IdPersonaTextBox.Text = string.Empty;
-        DniTextBox.Text = string.Empty;
-        NombreTextBox.Text = string.Empty;
-        ApellidoTextBox.Text = string.Empty;
+        LimpiarPersona();
+        NuevoPersonaButton.Enabled = false;
+    }
+
+    private void LimpiarPersona()
+    {
+        _personaBindingSource.DataSource = new Persona(); // Objeto vacío
+        _autosDePersonaBindingSource.DataSource = null;
+        ValorTotalAutosLabel.Text = "0,00 €";
     }
 
     private void GuardarPersonaButton_Click(object sender, EventArgs e)
     {
         try
         {
-            if (IdPersonaTextBox.Text != string.Empty
-                && PersonasDataGridView.SelectedRows[0].DataBoundItem is Persona personaSeleccionada)
+            if (_personaBindingSource.Current is Persona personaSeleccionada)
             {
-                personaSeleccionada.Id = int.Parse(IdPersonaTextBox.Text);
                 personaSeleccionada.DNI = DniTextBox.Text;
                 personaSeleccionada.Nombre = NombreTextBox.Text;
                 personaSeleccionada.Apellido = ApellidoTextBox.Text;
-                _viewController.ActualizarPersona(personaSeleccionada);
-                CargarPersonas();
-            }
-            else
-            {
-                _viewController.CrearPersona(DniTextBox.Text, NombreTextBox.Text, ApellidoTextBox.Text);
+
+                if (personaSeleccionada.Id == 0) // Nueva persona
+                {
+                    _viewController.CrearPersona(personaSeleccionada.DNI, personaSeleccionada.Nombre, personaSeleccionada.Apellido);
+                }
+                else // Persona existente
+                {
+                    _viewController.ActualizarPersona(personaSeleccionada);
+                }
+
+                LimpiarPersona();
                 CargarPersonas();
             }
         }
@@ -85,21 +121,21 @@ public partial class ViewForm : Form
         {
             MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+        finally
+        {
+            NuevoPersonaButton.Enabled = true;
+        }
     }
 
     private void EliminarPersonaButton_Click(object sender, EventArgs e)
     {
-        if (PersonasDataGridView.SelectedRows.Count > 0)
+        if (_personaBindingSource.Current is Persona personaSeleccionada)
         {
-            if (PersonasDataGridView.SelectedRows[0].DataBoundItem is Persona personaSeleccionada)
-            {
-                _viewController.EliminarPersona(personaSeleccionada);
-                CargarPersonas();
-            }
+            _viewController.EliminarPersona(personaSeleccionada);
+            LimpiarPersona();
+            CargarPersonas();
         }
     }
-
-
 
     // Métodos para Autos.------------------------------------------------------
     private void CargarAutos()

@@ -202,6 +202,7 @@
             EliminarPersonaButton.TabIndex = 4;
             EliminarPersonaButton.Text = "Eliminar";
             EliminarPersonaButton.UseVisualStyleBackColor = true;
+            EliminarPersonaButton.Click += EliminarPersonaButton_Click;
             // 
             // GuardarPersonaButton
             // 
@@ -221,9 +222,9 @@
             NuevoPersonaButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             NuevoPersonaButton.Location = new Point(319, 445);
             NuevoPersonaButton.Name = "NuevoPersonaButton";
-            NuevoPersonaButton.Size = new Size(66, 28);
+            NuevoPersonaButton.Size = new Size(59, 28);
             NuevoPersonaButton.TabIndex = 2;
-            NuevoPersonaButton.Text = "Agregar";
+            NuevoPersonaButton.Text = "Nuevo";
             NuevoPersonaButton.UseVisualStyleBackColor = true;
             NuevoPersonaButton.Click += NuevoPersonaButton_Click;
             // 
@@ -239,6 +240,7 @@
             PersonasDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             PersonasDataGridView.Size = new Size(300, 423);
             PersonasDataGridView.TabIndex = 1;
+            PersonasDataGridView.SelectionChanged += PersonasDataGridView_SelectionChanged;
             // 
             // label1
             // 
@@ -403,9 +405,9 @@
             NuevoAutoButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             NuevoAutoButton.Location = new Point(319, 445);
             NuevoAutoButton.Name = "NuevoAutoButton";
-            NuevoAutoButton.Size = new Size(66, 28);
+            NuevoAutoButton.Size = new Size(59, 28);
             NuevoAutoButton.TabIndex = 2;
-            NuevoAutoButton.Text = "Agregar";
+            NuevoAutoButton.Text = "Nuevo";
             NuevoAutoButton.UseVisualStyleBackColor = true;
             // 
             // AutosDisponiblesDataGridView

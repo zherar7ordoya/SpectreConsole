@@ -1,0 +1,4 @@
+[15/3/2025 00:32:08] Error al seleccionar una persona. - Excepción: ArgumentException, Mensaje: Cannot bind to the property or column Apellido on the DataSource. (Parameter 'dataMember')
+[15/3/2025 00:41:23] Error al seleccionar una persona. - Excepción: ArgumentException, Mensaje: Cannot bind to the property or column Apellido on the DataSource. (Parameter 'dataMember')
+[15/3/2025 00:43:21] Error al seleccionar una persona. - Excepción: ArgumentException, Mensaje: Cannot bind to the property or column Apellido on the DataSource. (Parameter 'dataMember')
+[15/3/2025 00:44:17] Error al seleccionar una persona. - Excepción: ArgumentException, Mensaje: Cannot bind to the property or column Apellido on the DataSource. (Parameter 'dataMember')

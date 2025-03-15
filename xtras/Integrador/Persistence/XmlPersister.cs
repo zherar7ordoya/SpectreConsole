@@ -6,14 +6,6 @@ namespace Integrador.Persistence;
 
 public class XmlPersister<T> : IPersister<T> where T : IEntity
 {
-    private static void LogError(string message, Exception ex)
-    {
-        var logMessage = $"[{DateTime.Now}] {message} - Excepción: {ex.GetType().Name}, Mensaje: {ex.Message}";
-        File.AppendAllText("Log.txt", logMessage + Environment.NewLine);
-    }
-
-    //--------------------------------------------------------------------------
-
     public List<T> Read()
     {
         string file = $"{typeof(T).Name}.xml";
@@ -35,17 +27,17 @@ public class XmlPersister<T> : IPersister<T> where T : IEntity
         }
         catch (FileNotFoundException ex)
         {
-            LogError($"Archivo no encontrado: {file}", ex);
+            Service.LogError($"Archivo no encontrado: {file}", ex);
             throw new PersisterException($"El archivo {file} no fue encontrado.", ex);
         }
         catch (UnauthorizedAccessException ex)
         {
-            LogError($"Acceso no autorizado al archivo: {file}", ex);
+            Service.LogError($"Acceso no autorizado al archivo: {file}", ex);
             throw new PersisterException($"No tiene permisos para acceder al archivo {file}.", ex);
         }
         catch (Exception ex)
         {
-            LogError($"Error desconocido al leer {file}", ex);
+            Service.LogError($"Error desconocido al leer {file}", ex);
             throw new PersisterException($"Error al leer {file}.", ex);
         }
         finally
@@ -71,17 +63,17 @@ public class XmlPersister<T> : IPersister<T> where T : IEntity
         }
         catch (FileNotFoundException ex)
         {
-            LogError($"Archivo no encontrado: {file}", ex);
+            Service.LogError($"Archivo no encontrado: {file}", ex);
             throw new PersisterException($"El archivo {file} no fue encontrado.", ex);
         }
         catch (UnauthorizedAccessException ex)
         {
-            LogError($"Acceso no autorizado al archivo: {file}", ex);
+            Service.LogError($"Acceso no autorizado al archivo: {file}", ex);
             throw new PersisterException($"No tiene permisos para acceder al archivo {file}.", ex);
         }
         catch (Exception ex)
         {
-            LogError($"Error desconocido al leer {file}", ex);
+            Service.LogError($"Error desconocido al leer {file}", ex);
             throw new PersisterException($"Error al leer {file}.", ex);
         }
     }
@@ -96,17 +88,17 @@ public class XmlPersister<T> : IPersister<T> where T : IEntity
         }
         catch (FileNotFoundException ex)
         {
-            LogError($"Archivo no encontrado: {file}", ex);
+            Service.LogError($"Archivo no encontrado: {file}", ex);
             throw new PersisterException($"El archivo {file} no fue encontrado.", ex);
         }
         catch (UnauthorizedAccessException ex)
         {
-            LogError($"Acceso no autorizado al archivo: {file}", ex);
+            Service.LogError($"Acceso no autorizado al archivo: {file}", ex);
             throw new PersisterException($"No tiene permisos para acceder al archivo {file}.", ex);
         }
         catch (Exception ex)
         {
-            LogError($"Error desconocido al leer {file}", ex);
+            Service.LogError($"Error desconocido al leer {file}", ex);
             throw new PersisterException($"Error al leer {file}.", ex);
         }
     }
