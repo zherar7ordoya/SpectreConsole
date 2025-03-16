@@ -82,7 +82,7 @@ public class ViewController
         AsignacionesManager.AsignarAuto(persona, auto);
     }
 
-    public  void DesasignarAutoDePersona(Persona persona, Auto auto)
+    public static void DesasignarAutoDePersona(Persona persona, Auto auto)
     {
         AsignacionesManager.DesasignarAuto(persona, auto);
     }

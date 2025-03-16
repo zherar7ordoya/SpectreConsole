@@ -5,7 +5,6 @@ namespace Integrador.Entities;
 public class Persona : Entity
 {
     public Persona() { }
-
     public Persona(string dni, string nombre, string apellido)
     {
         DNI = dni;
@@ -15,11 +14,10 @@ public class Persona : Entity
 
     //--------------------------------------------------------------------------
 
-    public string? DNI { get; set; }
-    public string? Nombre { get; set; }
-    public string? Apellido { get; set; }
-
-    public List<Auto> Autos { get; } = [];
+    public string? DNI { get; set; } = string.Empty;
+    public string? Nombre { get; set; } = string.Empty;
+    public string? Apellido { get; set; } = string.Empty;
+    public List<Auto> Autos { get; set; } = [];
 
     //--------------------------------------------------------------------------
 

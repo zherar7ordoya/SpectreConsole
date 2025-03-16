@@ -47,10 +47,10 @@
             PersonasDataGridView = new DataGridView();
             label1 = new Label();
             panel2 = new Panel();
+            PrecioTextBox = new TextBox();
             AñoTextBox = new TextBox();
             label14 = new Label();
             label11 = new Label();
-            PrecioNumericUpDown = new NumericUpDown();
             ModeloTextBox = new TextBox();
             MarcaTextBox = new TextBox();
             PatenteTextBox = new TextBox();
@@ -73,7 +73,6 @@
             ((System.ComponentModel.ISupportInitialize)AutosDePersonaDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PersonasDataGridView).BeginInit();
             panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)PrecioNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AutosDisponiblesDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AutosAsignadosDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ErrorProvider).BeginInit();
@@ -171,13 +170,13 @@
             // 
             // ValorTotalAutosLabel
             // 
-            ValorTotalAutosLabel.AutoSize = true;
             ValorTotalAutosLabel.Font = new Font("Calibri", 22F);
-            ValorTotalAutosLabel.Location = new Point(467, 213);
+            ValorTotalAutosLabel.Location = new Point(319, 208);
             ValorTotalAutosLabel.Name = "ValorTotalAutosLabel";
-            ValorTotalAutosLabel.Size = new Size(76, 37);
+            ValorTotalAutosLabel.Size = new Size(214, 37);
             ValorTotalAutosLabel.TabIndex = 6;
             ValorTotalAutosLabel.Text = "Total";
+            ValorTotalAutosLabel.TextAlign = ContentAlignment.MiddleRight;
             // 
             // AutosDePersonaDataGridView
             // 
@@ -256,10 +255,10 @@
             // 
             panel2.BackColor = Color.White;
             panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Controls.Add(PrecioTextBox);
             panel2.Controls.Add(AñoTextBox);
             panel2.Controls.Add(label14);
             panel2.Controls.Add(label11);
-            panel2.Controls.Add(PrecioNumericUpDown);
             panel2.Controls.Add(ModeloTextBox);
             panel2.Controls.Add(MarcaTextBox);
             panel2.Controls.Add(PatenteTextBox);
@@ -278,6 +277,13 @@
             panel2.Padding = new Padding(10);
             panel2.Size = new Size(549, 490);
             panel2.TabIndex = 1;
+            // 
+            // PrecioTextBox
+            // 
+            PrecioTextBox.Location = new Point(433, 205);
+            PrecioTextBox.Name = "PrecioTextBox";
+            PrecioTextBox.Size = new Size(100, 25);
+            PrecioTextBox.TabIndex = 19;
             // 
             // AñoTextBox
             // 
@@ -298,19 +304,11 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(319, 207);
+            label11.Location = new Point(319, 208);
             label11.Name = "label11";
             label11.Size = new Size(47, 18);
             label11.TabIndex = 16;
             label11.Text = "Precio";
-            // 
-            // PrecioNumericUpDown
-            // 
-            PrecioNumericUpDown.DecimalPlaces = 2;
-            PrecioNumericUpDown.Location = new Point(433, 205);
-            PrecioNumericUpDown.Name = "PrecioNumericUpDown";
-            PrecioNumericUpDown.Size = new Size(100, 25);
-            PrecioNumericUpDown.TabIndex = 15;
             // 
             // ModeloTextBox
             // 
@@ -387,6 +385,7 @@
             EliminarAutoButton.TabIndex = 4;
             EliminarAutoButton.Text = "Eliminar";
             EliminarAutoButton.UseVisualStyleBackColor = true;
+            EliminarAutoButton.Click += EliminarAutoButton_Click;
             // 
             // GuardarAutoButton
             // 
@@ -398,6 +397,7 @@
             GuardarAutoButton.TabIndex = 3;
             GuardarAutoButton.Text = "Guardar";
             GuardarAutoButton.UseVisualStyleBackColor = true;
+            GuardarAutoButton.Click += GuardarAutoButton_Click;
             // 
             // NuevoAutoButton
             // 
@@ -409,6 +409,7 @@
             NuevoAutoButton.TabIndex = 2;
             NuevoAutoButton.Text = "Nuevo";
             NuevoAutoButton.UseVisualStyleBackColor = true;
+            NuevoAutoButton.Click += NuevoAutoButton_Click;
             // 
             // AutosDisponiblesDataGridView
             // 
@@ -422,6 +423,7 @@
             AutosDisponiblesDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             AutosDisponiblesDataGridView.Size = new Size(300, 423);
             AutosDisponiblesDataGridView.TabIndex = 1;
+            AutosDisponiblesDataGridView.SelectionChanged += AutosDisponiblesDataGridView_SelectionChanged;
             // 
             // label12
             // 
@@ -444,6 +446,7 @@
             AsignarAutoButton.Text = "Asignar auto";
             AsignarAutoButton.TextImageRelation = TextImageRelation.TextBeforeImage;
             AsignarAutoButton.UseVisualStyleBackColor = true;
+            AsignarAutoButton.Click += AsignarAutoButton_Click;
             // 
             // QuitarAutoButton
             // 
@@ -456,6 +459,7 @@
             QuitarAutoButton.Text = "Quitar auto";
             QuitarAutoButton.TextImageRelation = TextImageRelation.ImageBeforeText;
             QuitarAutoButton.UseVisualStyleBackColor = true;
+            QuitarAutoButton.Click += QuitarAutoButton_Click;
             // 
             // AutosAsignadosDataGridView
             // 
@@ -507,7 +511,6 @@
             ((System.ComponentModel.ISupportInitialize)PersonasDataGridView).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)PrecioNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)AutosDisponiblesDataGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)AutosAsignadosDataGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)ErrorProvider).EndInit();
@@ -548,7 +551,6 @@
         internal DataGridView AutosDisponiblesDataGridView;
         internal Label label12;
         internal Label label11;
-        internal NumericUpDown PrecioNumericUpDown;
         internal Button AsignarAutoButton;
         internal Button QuitarAutoButton;
         internal DataGridView AutosAsignadosDataGridView;
@@ -556,5 +558,6 @@
         internal ErrorProvider ErrorProvider;
         internal TextBox AñoTextBox;
         internal Label label14;
+        internal TextBox PrecioTextBox;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Integrador.Abstract;
+using System.Xml.Serialization;
 
 namespace Integrador.Entities;
 
@@ -17,15 +18,28 @@ public class Auto : Entity
 
     //--------------------------------------------------------------------------
 
-    public string? Patente { get; set; }
-    public string? Marca { get; set; }
-    public string? Modelo { get; set; }
-    public int Año { get; set; }
-    public decimal Precio { get; set; }
+    public string? Patente { get; set; } = string.Empty;
+    public string? Marca { get; set; } = string.Empty;
+    public string? Modelo { get; set; } = string.Empty;
+    public int Año { get; set; } = DateTime.Now.Year;
+    public decimal Precio { get; set; } = 0.0m;
 
-    // No puede ser "internal set" porque "set" se necesita para la serialización.
-    public Persona? Dueño { get; set; }
-    //internal void EstablecerDueño(Persona? nuevoDueño) => Dueño = nuevoDueño;
+    // Propiedad para almacenar el ID del dueño (serializable)
+    public int DueñoId { get; set; }
+
+    // Propiedad Dueño (no serializable)
+    [XmlIgnore]
+    public Persona? Dueño
+    {
+        get => _dueño;
+        set
+        {
+            _dueño = value;
+            DueñoId = value?.Id ?? 0; // Actualizar DueñoId cuando se asigne un dueño
+        }
+    }
+
+    private Persona? _dueño;
 
     //--------------------------------------------------------------------------
 
