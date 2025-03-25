@@ -1,6 +1,4 @@
 ﻿using Spectre.Console;
-using System;
-using System.Linq;
 
 namespace Algorithmics.Kaprekar;
 
@@ -33,4 +31,21 @@ public static class Kaprekar
 
         Console.WriteLine($"\nLlegamos a 6174 en {iteracion} iteraciones.");
     }
+}
+
+public static class Helper
+{
+    public static bool EsNumeroValido(string num)
+    {
+        return num.Length == 4 && int.TryParse(num, out _) && !num.All(c => c == num[0]);
+    }
+}
+
+public record Resultado(int Numero)
+{
+    public string Descendente { get; init; } = new string([.. Numero.ToString("D4").OrderByDescending(c => c)]);
+    public string Ascendente { get; init; } = new string([.. Numero.ToString("D4").OrderBy(c => c)]);
+    public int Mayor { get; init; } = int.Parse(new string([.. Numero.ToString("D4").OrderByDescending(c => c)]));
+    public int Menor { get; init; } = int.Parse(new string([.. Numero.ToString("D4").OrderBy(c => c)]));
+    public Resultado Calcular() => new(Mayor - Menor);
 }

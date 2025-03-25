@@ -1,5 +1,6 @@
 ﻿using Algorithmics.CompositePattern;
 using Algorithmics.DependencyInjection;
+using Algorithmics.Interfaz;
 using Algorithmics.Kaprekar;
 
 using Spectre.Console;
@@ -10,6 +11,7 @@ var examples = new List<(string Title, Action Example)>
     ("Patrón composite", CompositePattern.Run),
     ("Inyección de dependencias", DependencyInjection.Run),
     ("Número de Kaprekar", Kaprekar.Run),
+    ("Interfaz como base arquitectónica", Interfaz.Run),
     ("Salir", () => Environment.Exit(0))
 };
 

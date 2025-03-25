@@ -30,7 +30,7 @@ public static class CompositePattern
         root.Add(folder3);
 
         // Display results
-        Console.WriteLine("--- Folder Content ---");
+        Console.WriteLine("--- Folder Content ---\n");
         Console.WriteLine(root.GetContent());
 
         Console.WriteLine("--- Folder Sizes ---");
@@ -38,5 +38,45 @@ public static class CompositePattern
         Console.WriteLine($"{folder2.Name} size: {folder2.GetSize()} bytes");
         Console.WriteLine($"{folder3.Name} size: {folder3.GetSize()} bytes");
         Console.WriteLine($"Root size: {root.GetSize()} bytes");
+    }
+}
+
+abstract class FileComponent(string name)
+{
+    public string Name { get; protected set; } = name;
+    public abstract long GetSize();
+    public abstract string GetContent();
+}
+
+class FileLeaf(string name, string content) : FileComponent(name)
+{
+    private readonly string Content = content;
+    public override long GetSize() => Content.Length;
+    public override string GetContent() => Content;
+}
+
+class FolderComposite(string name) : FileComponent(name)
+{
+    private readonly List<FileComponent> children = [];
+    public void Add(FileComponent component) => children.Add(component);
+
+    public override long GetSize()
+    {
+        long totalSize = 0;
+        foreach (var child in children)
+        {
+            totalSize += child.GetSize();
+        }
+        return totalSize;
+    }
+
+    public override string GetContent()
+    {
+        string content = $"Folder: {Name}\n";
+        foreach (var child in children)
+        {
+            content += $"\t{child.GetContent()}\n";
+        }
+        return content;
     }
 }
