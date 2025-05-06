@@ -1,9 +1,9 @@
-﻿using Algorithmics.CompositePattern;
-using Algorithmics.DependencyInjection;
-using Algorithmics.Interfaz;
-using Algorithmics.Kaprekar;
+﻿using Spectre.Console;
 
-using Spectre.Console;
+using SpectreConsole.ArchitectureInterface;
+using SpectreConsole.CompositePattern;
+using SpectreConsole.DependencyInjection;
+using SpectreConsole.Kaprekar;
 
 
 var examples = new List<(string Title, Action Example)>

@@ -1,6 +1,6 @@
 ﻿using Spectre.Console;
 
-namespace Algorithmics.CompositePattern;
+namespace SpectreConsole.CompositePattern;
 
 public static class CompositePattern
 {

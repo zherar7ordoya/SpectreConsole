@@ -1,6 +1,6 @@
 ﻿using Spectre.Console;
 
-namespace Algorithmics.Interfaz;
+namespace SpectreConsole.ArchitectureInterface;
 
 public static class Interfaz
 {

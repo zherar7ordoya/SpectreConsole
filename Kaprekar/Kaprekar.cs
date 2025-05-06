@@ -1,6 +1,6 @@
 ﻿using Spectre.Console;
 
-namespace Algorithmics.Kaprekar;
+namespace SpectreConsole.Kaprekar;
 
 public static class Kaprekar
 {

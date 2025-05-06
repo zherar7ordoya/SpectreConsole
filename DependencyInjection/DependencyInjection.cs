@@ -1,6 +1,6 @@
 ﻿using Spectre.Console;
 
-namespace Algorithmics.DependencyInjection;
+namespace SpectreConsole.DependencyInjection;
 
 public static class DependencyInjection
 {
